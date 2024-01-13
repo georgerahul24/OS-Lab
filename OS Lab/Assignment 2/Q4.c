@@ -16,7 +16,8 @@ int main(int argc, char *argv[]) {
 
         if (readfd != -1 && writefd != -1) {
             char buff[BUFFER_SIZE];
-            read(readfd, buff, BUFFER_SIZE);
+            int readSize = read(readfd, buff, BUFFER_SIZE);
+            printf("The file's read size is %d", readSize);
 
 
             int p1[2], p2[2];
@@ -33,6 +34,7 @@ int main(int argc, char *argv[]) {
 
             int oldstdin = dup(0);
             int oldstdout = dup(1);
+
             int pid1 = fork();
             int pid2 = fork();
             if (pid1 > 0 && pid2 > 0) {
@@ -69,7 +71,7 @@ int main(int argc, char *argv[]) {
             } else if (pid1 > 0 && pid2 == 0) {
                 //This is the second child
                 dup2(p2[0], 0); // stdin as the read file
-                dup2(p1[1], 1);// writing to the pipe
+                dup2(p2[1], 1);// writing to the pipe
 
 
                 execl("/home/btech/22/george.rahul22b/OS Lab/Assignment 2/change.o", (char *) NULL);

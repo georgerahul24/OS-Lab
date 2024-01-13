@@ -4,7 +4,7 @@ int main() {
     char ch;
     printf("\nQ3..........\nOpposite Case: ");
 
-    while ((ch = getchar()) != EOF) {
+    while ((ch = getchar()) != '\0') {
 
         if ((65 <= ch && ch <= 90)) {
             putchar(ch + ('a' - 'A'));
@@ -15,6 +15,5 @@ int main() {
         }
 
     }
-    printf("\n");
     return 0;
 }
