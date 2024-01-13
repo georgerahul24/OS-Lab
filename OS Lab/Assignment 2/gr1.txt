@@ -1,0 +1,6 @@
+
+Q3..........
+Type Something in the terminal: hELLO mY NAME IS gEORGE !!!
+Q2..........
+Type Something in the terminal:      !!!The number of non alphabetic characters are: 9
+hi
