@@ -3,6 +3,7 @@
 int main() {
     char ch;
     printf("\nQ3..........\nOpposite Case: ");
+
     while ((ch = getchar()) != EOF) {
 
         if ((65 <= ch && ch <= 90)) {

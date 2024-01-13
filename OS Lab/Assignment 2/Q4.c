@@ -28,8 +28,8 @@ int main(int argc, char *argv[]) {
                 fprintf(stderr, "Pipe had some errors");
                 exit(1);
             }
-            write(p1[1], buff, BUFFER_SIZE);
-            write(p2[1], buff, BUFFER_SIZE);
+            write(p1[1], buff, BUFFER_SIZE); // Writing the buffer into the write end
+            write(p2[1], buff, BUFFER_SIZE); // Writing the buffer into the write end
 
             int oldstdin = dup(0);
             int oldstdout = dup(1);
@@ -41,26 +41,27 @@ int main(int argc, char *argv[]) {
                 wait(NULL);
                 wait(NULL); // wait for both the children to finish
 
-                int n = read(p1[1], buff, BUFFER_SIZE);
-                write(writefd, buff, n);
-                n = read(p2[1], buff, BUFFER_SIZE);
-                write(writefd, buff, n);
+                int readSize1 = read(p1[0], buff, BUFFER_SIZE);
+                write(writefd, buff, readSize1);
+                int readSize2 = read(p2[0], buff, BUFFER_SIZE);
+                write(writefd, buff, readSize2);
 
+
+                close(p1[0]);
+                close(p2[0]); //Closing the read ends of the pipe since it won't be  used anymore
                 close(readfd);
                 close(writefd);
                 printf("The main parent process has terminated\n");
 
             } else if (pid1 == 0 && pid2 > 0) {
                 //This is the first child
-                close(0); // closing stdin
                 dup2(p1[0], 0); // stdin as the read file
-                dup2(writefd, 1);// writing to the pipe
+                dup2(p1[1], 1);// writing to the pipe
 
                 execl("/home/btech/22/george.rahul22b/OS Lab/Assignment 2/count.o", (char *) NULL);
 
                 wait(NULL); // Wait for the grandchild process to end
-                dup2(oldstdin, 0); //TODO: Why is this not working
-                dup2(oldstdout, 1);
+                close(p1[1]); //Closing the write end of the pipe since it won't be used anymore
                 //Closing the assigned stdin and stdout
                 printf("First Child Terminated\n");
 
@@ -68,15 +69,11 @@ int main(int argc, char *argv[]) {
             } else if (pid1 > 0 && pid2 == 0) {
                 //This is the second child
                 dup2(p2[0], 0); // stdin as the read file
-                dup2(writefd, 1);// writing to the pipe
+                dup2(p1[1], 1);// writing to the pipe
 
 
                 execl("/home/btech/22/george.rahul22b/OS Lab/Assignment 2/change.o", (char *) NULL);
-
-                close(0);
-                close(1);
-                dup2(oldstdin, 0);
-                dup2(oldstdout, 1);
+                close(p2[1]); //Closing the write end of the pipe since it won't be used anymore
                 printf("Second Child Terminated\n");
             } else {
                 //This is the grandchild;
