@@ -3,7 +3,7 @@
 int main() {
     printf("\nQ2..........\n");
     char ch;
-    int count = 1; //To include "\n" since EOF is considered as "\n" in terminal
+    int count = 0;
     while ((ch = getchar()) != '\0') {
 
         if (!((65 <= ch && ch <= 90) || (97 <= ch && ch <= 122))) {
