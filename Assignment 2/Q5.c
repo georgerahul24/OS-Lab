@@ -120,7 +120,7 @@ int main(int argc, char *argv[]) {
 
         if (pid1 > 0 && pid2 > 0) {
             //This is the parent process
-            int status1, status2, killed = 0;
+            int status[2], killed = 0, statusIndex = 0;
             if (setjmp(env) != 0) {
                 // This means that the setjmp is not working properly
                 //printf("SetJMP")
@@ -130,9 +130,18 @@ int main(int argc, char *argv[]) {
                 killed = 1;
 
             }
-            int pid1 = wait(&status1);
-            int pid2 = wait(&status2); // wait for both the children to finish
+            int pid, _status;
             //Status 2 means it errored out. Status 0 means normal
+            while ((pid = wait(&_status)) > 0) {
+                // Wait = -1 means there is no more child process to exit
+                status[statusIndex++]=_status;
+                if (pid == pid1 && _status == 2) {
+                    //This means that the count had some problem. So we must kill change.o also
+                    killChildren(pid2);
+                    killed = 1;
+                }
+
+            }
 
             if (killed == 0) {
                 //If the proccess was killed, then the pipe not have been wrritten to at all
@@ -147,7 +156,7 @@ int main(int argc, char *argv[]) {
             close(p2[0]); //Closing the read ends of the pipe since it won't be  used anymore
             close(readfd);
             close(writefd);
-            printf("The statuses of the proccessess are %d and %d\n", status1, status2);
+            printf("The statuses of the proccessess are %d and %d\n", status[0], status[1]);
             printf("The main parent process has terminated\n");
 
         } else if (pid1 == 0 && pid2 > 0) {

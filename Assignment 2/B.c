@@ -1,6 +1,7 @@
 #include "stdio.h"
 #include "stdlib.h"
 int main() {
+    while (1);
     char ch;
     printf("\nQ3..........\nOpposite Case: ");
 
