@@ -1,6 +1,8 @@
 #include "stdio.h"
 
 int main() {
+    while (1);
+
     printf("\nQ2..........\n");
     char ch;
     int count = 1; //To include "\n" since EOF is considered as "\n" in terminal
