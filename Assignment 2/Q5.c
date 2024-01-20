@@ -10,9 +10,13 @@
 
 jmp_buf env;
 
+void killChildren(int pid) {
+    kill(pid, SIGINT);
+}
+
 void handler() {
-    fprintf(stderr,"Handler is running");
-    longjmp(env,1);
+    fprintf(stderr, "Handler is running\n");
+    longjmp(env, 1);
 }
 
 
@@ -90,16 +94,16 @@ int main(int argc, char *argv[]) {
     if (readfd != -1 && writefd != -1) {
         char buff[BUFFER_SIZE];
         int readSize = read(readfd, buff, BUFFER_SIZE);
-        printf("The file's read size is %d", readSize);
+        printf("The file's read size is %d\n", readSize);
 
 
         int p1[2], p2[2];
         if (pipe(p1) < 0) {
-            fprintf(stderr, "Pipe had some errors");
+            fprintf(stderr, "Pipe had some errors\n");
             exit(1);
         }
         if (pipe(p2) < 0) {
-            fprintf(stderr, "Pipe had some errors");
+            fprintf(stderr, "Pipe had some errors\n");
             exit(1);
         }
         write(p1[1], buff, BUFFER_SIZE); // Writing the buffer into the write end
@@ -108,36 +112,42 @@ int main(int argc, char *argv[]) {
         int oldstdin = dup(0);
         int oldstdout = dup(1);
         signal(SIGALRM, handler);
-        if (setjmp(env) != 0) {
-            // This means that the setjmp is not working properly
-            printf("SetJMP");
-            exit(1);
-        }
+
         alarm(1);
         int pid1 = fork();
         int pid2 = fork();
 
 
-
-
-
         if (pid1 > 0 && pid2 > 0) {
             //This is the parent process
-            int pid;
-            
-            wait(NULL);
-            wait(NULL); // wait for both the children to finish
+            int status1, status2, killed = 0;
+            if (setjmp(env) != 0) {
+                // This means that the setjmp is not working properly
+                //printf("SetJMP")
+                killChildren(pid1);
+                killChildren(pid2);
 
-            int readSize1 = read(p1[0], buff, BUFFER_SIZE);
-            write(writefd, buff, readSize1);
-            int readSize2 = read(p2[0], buff, BUFFER_SIZE);
-            write(writefd, buff, readSize2);
+                killed = 1;
+
+            }
+            int pid1 = wait(&status1);
+            int pid2 = wait(&status2); // wait for both the children to finish
+            //Status 2 means it errored out. Status 0 means normal
+
+            if (killed == 0) {
+                //If the proccess was killed, then the pipe not have been wrritten to at all
+                int readSize1 = read(p1[0], buff, BUFFER_SIZE);
+                write(writefd, buff, readSize1);
+                int readSize2 = read(p2[0], buff, BUFFER_SIZE);
+                write(writefd, buff, readSize2);
+            }
 
 
             close(p1[0]);
             close(p2[0]); //Closing the read ends of the pipe since it won't be  used anymore
             close(readfd);
             close(writefd);
+            printf("The statuses of the proccessess are %d and %d\n", status1, status2);
             printf("The main parent process has terminated\n");
 
         } else if (pid1 == 0 && pid2 > 0) {
@@ -173,7 +183,7 @@ int main(int argc, char *argv[]) {
 
 
     } else {
-        fprintf(stderr, "File could not be opened");
+        fprintf(stderr, "File could not be opened\n");
     }
 
     alarm(0);

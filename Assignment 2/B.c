@@ -1,5 +1,5 @@
 #include "stdio.h"
-
+#include "stdlib.h"
 int main() {
     char ch;
     printf("\nQ3..........\nOpposite Case: ");
