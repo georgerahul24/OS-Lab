@@ -1,0 +1,1 @@
+Overlay is thereValue of overlay is: 100   The number of non alphabetic characters are: 3

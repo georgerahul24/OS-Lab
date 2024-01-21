@@ -113,7 +113,7 @@ int main(int argc, char *argv[]) {
         int oldstdout = dup(1);
         signal(SIGALRM, handler);
 
-        alarm(1);
+        alarm(3);
         int pid1 = fork();
         int pid2 = fork();
 
@@ -144,7 +144,7 @@ int main(int argc, char *argv[]) {
             }
 
             if (killed == 0) {
-                //If the proccess was killed, then the pipe not have been wrritten to at all
+                //If the process was killed, then the pipe not have been written to at all
                 int readSize1 = read(p1[0], buff, BUFFER_SIZE);
                 write(writefd, buff, readSize1);
                 int readSize2 = read(p2[0], buff, BUFFER_SIZE);
