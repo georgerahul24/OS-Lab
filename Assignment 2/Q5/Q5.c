@@ -165,9 +165,9 @@ int main(int argc, char *argv[]) {
             dup2(p1[1], 1);// writing to the pipe
 
             if (overlay) {
-                execl("/home/btech/22/george.rahul22b/OS Lab/Assignment 2/count.o", argv[overlayIndex], (char *) NULL);
+                execl("count.o", argv[overlayIndex], (char *) NULL);
             } else {
-                execl("/home/btech/22/george.rahul22b/OS Lab/Assignment 2/count.o", (char *) NULL);
+                execl("count.o", (char *) NULL);
             }
 
             wait(NULL); // Wait for the grandchild process to end
@@ -182,7 +182,7 @@ int main(int argc, char *argv[]) {
             dup2(p2[1], 1);// writing to the pipe
 
 
-            execl("/home/btech/22/george.rahul22b/OS Lab/Assignment 2/change.o", (char *) NULL);
+            execl("change.o", (char *) NULL);
             close(p2[1]); //Closing the write end of the pipe since it won't be used anymore
             printf("Second Child Terminated\n");
         } else {
