@@ -1,1 +1,2 @@
- The number of non alphabetic characters are: 1
+  !!!     !!
+The number of non alphabetic characters are: 13

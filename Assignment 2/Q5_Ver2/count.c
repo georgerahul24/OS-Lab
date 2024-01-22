@@ -16,7 +16,7 @@ int main(int argc, char *argv[]) {
     signal(SIGTERM, sigtermHandler);
     signal(SIGPIPE, sigpipeHandler);
 
-    if (argc == 0) {
+    if (argc == 1) {
         printf("Overlay is not there");
         char ch;
         int count = 0;
@@ -29,12 +29,12 @@ int main(int argc, char *argv[]) {
         }
         printf("The number of non alphabetic characters are: %d\n", count);
 
-    } else if (argc == 1) {
+    } else if (argc == 2) {
         // This means that there is an overlay
         printf("Overlay is there");
         char ch;
         int count = 0;
-        int overlay = atoi(argv[0] + 1);
+        int overlay = atoi(argv[1] + 1);
         if (overlay == 0) {
             fprintf(stderr, "Incorrect overlay");
             exit(1);

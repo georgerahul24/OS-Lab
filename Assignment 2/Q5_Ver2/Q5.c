@@ -138,7 +138,7 @@ int main(int argc, char *argv[]) {
                 // This is for the convert
                 dup2(p[1], STDOUT_FILENO); // Convert should write to pipe
                 dup2(readfd, STDIN_FILENO); // Convert should read from file
-                execl("convert.o", (char *) NULL);
+                execl("convert.o", "convert",(char *) NULL);
                 perror("Error when running convert.o ");
                 exit(1);
             }
@@ -156,10 +156,10 @@ int main(int argc, char *argv[]) {
 
             if (overlay==1) {
                 printf("Overlay is there");
-                execl("count.o", argv[overlayIndex], (char *) NULL);
+                execl("count.o","count" ,argv[overlayIndex], (char *) NULL);
 
             } else {
-                execl("count.o", (char *) NULL);
+                execl("count.o", "count",(char *) NULL);
             }
 
             perror("Error when running count.o");
