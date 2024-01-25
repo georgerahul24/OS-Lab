@@ -1,0 +1,10 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     FCFS
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _readProcessesFromFile, symObjAddr: 0x0, symBinAddr: 0x100003AF0, symSize: 0x1A0 }
+  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _readProcessesFromFile, symObjAddr: 0x0, symBinAddr: 0x100003AF0, symSize: 0x1A0 }
+  - { offsetInCU: 0xD2, offset: 0xD2, size: 0x8, addend: 0x0, symName: _printProcessTable, symObjAddr: 0x1A0, symBinAddr: 0x100003C90, symSize: 0x12C }
+  - { offsetInCU: 0x112, offset: 0x112, size: 0x8, addend: 0x0, symName: _FCFS, symObjAddr: 0x2CC, symBinAddr: 0x100003DBC, symSize: 0x100 }
+  - { offsetInCU: 0x16E, offset: 0x16E, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x3CC, symBinAddr: 0x100003EBC, symSize: 0x2C }
+...
