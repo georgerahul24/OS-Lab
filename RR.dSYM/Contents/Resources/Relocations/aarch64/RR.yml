@@ -1,0 +1,10 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     RR
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _readProcessesFromFile, symObjAddr: 0x0, symBinAddr: 0x10000393C, symSize: 0x1A8 }
+  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _readProcessesFromFile, symObjAddr: 0x0, symBinAddr: 0x10000393C, symSize: 0x1A8 }
+  - { offsetInCU: 0xD2, offset: 0xD2, size: 0x8, addend: 0x0, symName: _printProcessTable, symObjAddr: 0x1A8, symBinAddr: 0x100003AE4, symSize: 0x158 }
+  - { offsetInCU: 0x112, offset: 0x112, size: 0x8, addend: 0x0, symName: _RR, symObjAddr: 0x300, symBinAddr: 0x100003C3C, symSize: 0x1FC }
+  - { offsetInCU: 0x19E, offset: 0x19E, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x4FC, symBinAddr: 0x100003E38, symSize: 0x38 }
+...
