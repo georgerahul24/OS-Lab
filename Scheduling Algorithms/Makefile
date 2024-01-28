@@ -1,5 +1,4 @@
 run:
-	gcc process.h -o process.o && chmod +x process.o && ./process.o
-fcfs:
-	gcc process.h
-	gcc FCFS.c -o fcfs.o && chmod +x process.o && ./fcfs.o
+	gcc process.h -o bin/process
+	gcc FCFS.c -o bin/fcfs.o &&  ./bin/fcfs.o
+

@@ -41,8 +41,6 @@ void RR() {
 
     }
     printProcessTable(pa);
-
-
 }
 
 int main() {
