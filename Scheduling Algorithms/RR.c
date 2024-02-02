@@ -4,7 +4,7 @@
 
 void RR() {
     int currentTime = 0,completed_process = 0;
-    ProcessArray *pa = readProcessesFromFile("/Users/georgerahul/Desktop/OS-Lab/Scheduling Algorithms/processes.txt");
+    ProcessArray *pa = readProcessesFromFile("processes.txt");
 
     while (completed_process < pa->numberOfProcesses) {
         int no_active_process = 1; //inorder there is no active process, we need to run the clock

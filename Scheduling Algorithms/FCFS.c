@@ -3,7 +3,7 @@
 
 void FCFS() {
     int currentTime = 0, current_process_number = 0;
-    ProcessArray *process_table = readProcessesFromFile("/Users/georgerahul/Desktop/OS-Lab/Scheduling Algorithms/processes.txt");
+    ProcessArray *process_table = readProcessesFromFile("processes.txt");
 
     while (current_process_number < process_table->numberOfProcesses) {
         Process *current_process = process_table->processes[current_process_number];
