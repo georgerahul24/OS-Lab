@@ -1,9 +1,9 @@
 #include "process.h"
 
 
-void FCFS() {
+void FCFS(char * filename) {
     int currentTime = 0, current_process_number = 0;
-    ProcessArray *process_table = readProcessesFromFile("processes.txt");
+    ProcessArray *process_table = readProcessesFromFile(filename);
 
     while (current_process_number < process_table->numberOfProcesses) {
         Process *current_process = process_table->processes[current_process_number];
@@ -25,11 +25,7 @@ void FCFS() {
         current_process->timeCompleted=currentTime;
     }
     printProcessTable(process_table);
+    printStatistics(process_table);
 
 
-}
-
-int main() {
-    FCFS();
-    return 0;
 }

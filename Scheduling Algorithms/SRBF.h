@@ -10,7 +10,7 @@ Process *findMinNonCompleted(ProcessArray *pa, int currentTime) {
 
         if (remainingBurstTime < minBurstTime && temp->finished == 0 && temp->arrival <= currentTime) {
             minProcess = temp;
-            minBurstTime=remainingBurstTime;
+            minBurstTime = remainingBurstTime;
         }
 
     }
@@ -19,9 +19,9 @@ Process *findMinNonCompleted(ProcessArray *pa, int currentTime) {
 }
 
 
-int main() {
+void SRBF(char *filename) {
     int currentTime = 0, completed_process = 0;
-    ProcessArray *pa = readProcessesFromFile("/Users/georgerahul/Desktop/OS-Lab/Scheduling Algorithms/processes.txt");
+    ProcessArray *pa = readProcessesFromFile(filename);
     printProcessTable(pa);
 
     while (completed_process < pa->numberOfProcesses) {
@@ -32,12 +32,15 @@ int main() {
             if ((p->cpu_burst - p->time_received) == 0) {
                 p->finished = 1;
                 p->timeCompleted = currentTime + 1;
-                completed_process+=1;
+                p->turnaround = p->timeCompleted - p->arrival;
+                p->wait = p->turnaround - p->cpu_burst;
+                completed_process += 1;
+
             }
         }
         currentTime += 1;
     }
-    return 0;
-
+    printProcessTable(pa);
+    printStatistics(pa);
 
 }

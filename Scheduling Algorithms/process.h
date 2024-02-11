@@ -1,6 +1,7 @@
+
 #include "stdio.h"
 #include "stdlib.h"
-
+#pragma once
 #define maximum_processes 1000
 typedef struct {
     char *name;
@@ -11,6 +12,7 @@ typedef struct {
     int time_received;
     int finished;
     int timeCompleted;
+    int lastWaitQueueEntryTime;
 
 
 } Process;
@@ -41,11 +43,12 @@ ProcessArray *readProcessesFromFile(char *filename) {
         p->name = processName;
         p->arrival = arrival;
         p->cpu_burst = cpuBurst;
-        p->wait = -1;
+        p->wait = 0;
         p->turnaround = -1;
-        p->time_received=0;
-        p->finished=0;
-        p->timeCompleted=-1;
+        p->time_received = 0;
+        p->finished = 0;
+        p->timeCompleted = -1;
+        p->lastWaitQueueEntryTime = p->arrival;
         pa->processes[pa->numberOfProcesses++] = p; // Adding the process to the array
     }
     return pa;
@@ -64,6 +67,20 @@ void printProcessTable(ProcessArray *pa) {
 
     }
 }
+
+void printStatistics(ProcessArray *pa) {
+    int statistics[2]; // Turnaround time is in index 0 and wait is in 1
+    statistics[0]=0;
+    statistics[1]=0;
+    for (int i = 0; i < pa->numberOfProcesses; i++) {
+        statistics[0] += pa->processes[i]->turnaround;
+        statistics[1] += pa->processes[i]->wait;
+    }
+
+    printf("Avg. Turn around time is %d\nAvg. Wait Time is %d", statistics[0] / pa->numberOfProcesses,
+           statistics[1] / pa->numberOfProcesses);
+}
+
 /*
 int main() {
     ProcessArray *pa = readProcessesFromFile("/Users/georgerahul/Desktop/OS-Lab/Scheduling Algorithms/processes.txt");
