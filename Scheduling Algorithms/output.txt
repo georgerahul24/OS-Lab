@@ -1,0 +1,58 @@
+gcc process.h -o bin/process
+gcc FCFS.h -o bin/FCFS.h
+gcc RR.h -o bin/RR.h
+gcc SRBF.h -o bin/SRBF.h
+gcc main.c -o bin/main.o &&  ./bin/main.o
+
+
+1. FCFS
+2. SRBF
+3. RR
+4. EXIT
+P0 0 3
+P1 1 6
+P2 5 4
+P3 7 3
+Process Name: P0
+Arrival: 0 || CPU Burst: 3 || Turnaround: 3 || Wait: 0 || Time Completed: 3 
+Process Name: P1
+Arrival: 1 || CPU Burst: 6 || Turnaround: 8 || Wait: 2 || Time Completed: 9 
+Process Name: P2
+Arrival: 5 || CPU Burst: 4 || Turnaround: 8 || Wait: 4 || Time Completed: 13 
+Process Name: P3
+Arrival: 7 || CPU Burst: 3 || Turnaround: 9 || Wait: 6 || Time Completed: 16 
+Avg. Turn around time is 7
+Avg. Wait Time is 3
+
+1. FCFS
+2. SRBF
+3. RR
+4. EXIT
+Enter the Time Quantum: P0 0 3
+P1 1 6
+P2 5 4
+P3 7 3
+[0 - 2] P0 running currently
+[2 - 4] P1 running currently
+[4 - 5] P0 running currently
+[5 - 7] P1 running currently
+[7 - 9] P2 running currently
+[9 - 11] P3 running currently
+[11 - 13] P1 running currently
+[13 - 15] P2 running currently
+[15 - 16] P3 running currently
+Process Name: P0
+Arrival: 0 || CPU Burst: 3 || Turnaround: 5 || Wait: 2 || Time Completed: 5 
+Process Name: P1
+Arrival: 1 || CPU Burst: 6 || Turnaround: 12 || Wait: 6 || Time Completed: 13 
+Process Name: P2
+Arrival: 5 || CPU Burst: 4 || Turnaround: 10 || Wait: 6 || Time Completed: 15 
+Process Name: P3
+Arrival: 7 || CPU Burst: 3 || Turnaround: 9 || Wait: 6 || Time Completed: 16 
+Avg. Turn around time is 9
+Avg. Wait Time is 5
+
+1. FCFS
+2. SRBF
+3. RR
+4. EXIT

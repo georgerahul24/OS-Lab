@@ -4,7 +4,8 @@
 
 
 int main() {
-    char *filename = "Scheduling Algorithms/processes.txt";
+    char *filename = "processes.txt";
+
     int choice = -1;
     do {
         printf("\n\n1. FCFS\n");
