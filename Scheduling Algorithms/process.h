@@ -77,8 +77,8 @@ void printStatistics(ProcessArray *pa) {
         statistics[1] += pa->processes[i]->wait;
     }
 
-    printf("Avg. Turn around time is %d\nAvg. Wait Time is %d", statistics[0] / pa->numberOfProcesses,
-           statistics[1] / pa->numberOfProcesses);
+    printf("Avg. Turn around time is %f\nAvg. Wait Time is %f", ((float )statistics[0]) / pa->numberOfProcesses,
+           ((float)statistics[1]) / pa->numberOfProcesses);
 }
 
 /*
