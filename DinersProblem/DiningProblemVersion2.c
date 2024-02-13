@@ -1,6 +1,9 @@
 
 /*
- This code has a deadlock. This is the question apparently
+ * According to the textbook, this code should not have deadlock.
+ * This is because the left chopstick is taken by odd numbered first
+ * And the right is taken by the even numbered first.
+ * But, it might have starvation in this.
  */
 
 
@@ -31,9 +34,17 @@ void *diningProblemThread(void *vindex) {
         printf("Philosopher[%d] is Hungry.....\n", index);
         while (1) { //This is to do this till we can eat
 
+            if (index % 2 == 0) {
+                //Even numbered will take the left one first
+                pthread_mutex_lock(&mutexArray[index]);
+                pthread_mutex_lock(&mutexArray[(index + 1) % NUMBER_OF_PHILOSOPHERS]);
+            } else {
+                //odd numbered will take the right one first
+                pthread_mutex_lock(&mutexArray[(index + 1) % NUMBER_OF_PHILOSOPHERS]);
+                pthread_mutex_lock(&mutexArray[index]);
 
-            pthread_mutex_lock(&mutexArray[index]);
-            pthread_mutex_lock(&mutexArray[(index + 1) % NUMBER_OF_PHILOSOPHERS]);
+            }
+
             //Wait till the chopstick mutexes  are free
 
 
