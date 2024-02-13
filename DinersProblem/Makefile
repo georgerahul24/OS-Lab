@@ -1,6 +1,6 @@
 ver1:
 	gcc DiningProblemVersion1.c -std=c99  -o DiningProblemVersion1.o -lpthread
-	./DiningProblemVersion1.o
+	./DiningProblemVersion1.o > outputver1.txt
 	rm ./DiningProblemVersion1.o
 
 ver2:

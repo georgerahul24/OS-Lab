@@ -22,16 +22,16 @@ pthread_mutex_t mutexArray[NUMBER_OF_PHILOSOPHERS]; // One mutex for one chopsti
 
 void *diningProblemThread(void *vindex) {
     int index = *((int *) vindex);
-    printf("Philospher[%d] is alive\n", index);
+    printf("[%d],a\n", index);
     fflush(stdout);
 
     while (1) {
-        printf("Philosopher[%d] is Thinking.....\n", index);
+        printf("[%d],t\n", index);
         fflush(stdout);
         sleep(THINKING_TIME);
 
 
-        printf("Philosopher[%d] is Hungry.....\n", index);
+        printf("[%d],h\n", index);
         while (1) { //This is to do this till we can eat
 
             if (index % 2 == 0) {
@@ -50,7 +50,7 @@ void *diningProblemThread(void *vindex) {
 
 
             //This means we have both the chopsticks. So, we can eat
-            printf("Philosopher[%d] is Eating.....\n", index);
+            printf("[%d],e\n", index);
             fflush(stdout);
             sleep(EATING_TIME);
 
