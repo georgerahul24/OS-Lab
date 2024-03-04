@@ -13,8 +13,8 @@ int matrix1[m][k] = {
 };
 
 int matrix2[k][n] = {
-        {10, 16,1},
-        {11, 19,2}
+        {10, 16, 1},
+        {11, 19, 2}
 
 };
 
@@ -25,21 +25,18 @@ typedef struct {
 } Args;
 
 
-
 void *calculate(void *vargs) {
 
     Args *args = (Args *) vargs;
     int i = args->i;
     int j = args->j;
 
-    int minval = i > j ? i : j;
 
-    for (int _i = 0; _i <= minval; _i++) {
+    for (int _i = 0; _i < k; _i++) {
 
         resultantMatrix[i][j] += matrix1[i][_i] * matrix2[_i][j];
     }
-
-
+    return (void *) NULL;
 }
 
 
@@ -50,7 +47,7 @@ int main() {
         for (int j = 0; j < n; j++) {
             Args *args = malloc(sizeof(Args));
             args->i = i;
-            args->j=j;
+            args->j = j;
             pthread_create(&threads[threadIndex++], NULL, calculate, args);
         }
     }
@@ -62,9 +59,9 @@ int main() {
     printf("All threads joined\n");
 
     printf("The matrix is: \n");
-    for(int i = 0;i<m;i++){
-        for(int j = 0; j<n;j++){
-            printf("%d ",resultantMatrix[i][j]);
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            printf("%d ", resultantMatrix[i][j]);
         }
         printf("\n");
     }
