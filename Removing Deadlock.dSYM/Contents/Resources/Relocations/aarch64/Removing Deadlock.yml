@@ -1,0 +1,10 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     Removing Deadlock
+relocations:
+  - { offsetInCU: 0x26, offset: 0x26, size: 0x8, addend: 0x0, symName: _readFile, symObjAddr: 0x0, symBinAddr: 0x100003518, symSize: 0x51C }
+  - { offsetInCU: 0x41, offset: 0x41, size: 0x8, addend: 0x0, symName: _readFile, symObjAddr: 0x0, symBinAddr: 0x100003518, symSize: 0x51C }
+  - { offsetInCU: 0x19D, offset: 0x19D, size: 0x8, addend: 0x0, symName: _destroy, symObjAddr: 0x51C, symBinAddr: 0x100003A34, symSize: 0x4C }
+  - { offsetInCU: 0x1C1, offset: 0x1C1, size: 0x8, addend: 0x0, symName: _finishedProcessIndex, symObjAddr: 0x568, symBinAddr: 0x100003A80, symSize: 0xF0 }
+  - { offsetInCU: 0x22F, offset: 0x22F, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x658, symBinAddr: 0x100003B70, symSize: 0x338 }
+...
